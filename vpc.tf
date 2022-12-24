@@ -18,3 +18,31 @@ resource "aws_internet_gateway" "internet-gateway" {
     Name = "${var.project-name}-igw"
   }
 }
+
+data "aws_availability_zones" "availability_zones" {}
+
+## Create Public Subnet 1
+# terraform aws create subnet
+resource "aws_subnet" "public-subnet-1" {
+  vpc_id = aws_vpc.vpc.id
+  cidr_block = var.public-subnet-1-cidr
+  availability_zone = data.aws_availability_zones.availability_zones.names[0]
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "Public subnet 1"
+  }
+}
+
+## Create Public Subnet 2
+# terraform aws create subnet
+resource "aws_subnet" "public-subnet-2" {
+  vpc_id = aws_vpc.vpc.id
+  cidr_block = var.public-subnet-2-cidr
+  availability_zone = data.aws_availability_zones.availability_zones.names[1]
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "Public subnet 2"
+  }
+}
