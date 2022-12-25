@@ -45,3 +45,9 @@ variable "private-subnet-4-cidr" {
   default = "the cidr of public subnet 4"
   type    = string
 }
+
+# ssh location
+variable "ssh-location" {
+  default = "IP Address that can SSH into the EC2 Instance"
+  type    = string
+}
