@@ -22,6 +22,11 @@ resource "aws_db_snapshot" "latest-db-snapshot" {
 ## Create Database Instance Restored from Snapshots
 # terraform aws db instance
 resource "aws_db_instance" "database-instance" {
+  allocated_storage      = 10
+  engine                 = "mysql"
+  name                   = "testdatabase"
+  password               = "edmonton"
+  username               = "foo"
   instance_class         = var.database-instance-class
   skip_final_snapshot    = true
   availability_zone      = data.aws_availability_zones.availability_zones.names[0]
