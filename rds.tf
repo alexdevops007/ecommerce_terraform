@@ -15,8 +15,7 @@ resource "aws_db_subnet_group" "database-subnet-group" {
 # terraform aws data db snapshot
 resource "aws_db_snapshot" "latest-db-snapshot" {
   db_snapshot_identifier = var.database-snapshot-identifier
-  most_recent            = true
-  snapshot_type          = "manual"
+  db_instance_identifier = aws_db_instance.database-instance.id
 }
 
 
@@ -27,7 +26,6 @@ resource "aws_db_instance" "database-instance" {
   skip_final_snapshot    = true
   availability_zone      = data.aws_availability_zones.availability_zones.names[0]
   identifier             = var.database-instance-identifier
-  snapshot_identifier    = aws_db_snapshot.latest-db-snapshot.id
   db_subnet_group_name   = aws_db_subnet_group.database-subnet-group.name
   multi_az               = var.multi-az-deployment
   vpc_security_group_ids = [aws_security_group.database-security-group.id]
