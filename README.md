@@ -1,4 +1,4 @@
-# terraform deploy ecommerce-website
+# terraform aws architecture
 
 Build infrastructure architecture using :
 
